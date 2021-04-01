@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import CartProductItem from './CartProductItem.vue';
+import CartProductItem from './CartProductItem';
 
 export default {
   components: {
