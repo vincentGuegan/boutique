@@ -48,7 +48,7 @@ export default {
       if (this.formIsValid()) {
         eventBus.addProduct({...this.form});
         this.resetForm();
-        eventBus.changePage('User');
+        this.$router.push('/shop');
       }      
     },
     resetForm() {

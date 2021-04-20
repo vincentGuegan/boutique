@@ -15,10 +15,7 @@ Object.keys(Filters).forEach( (f) => {
 export const eventBus = new Vue({
   data: {
     products: [],
-    cart: [
-      
-    ],
-    page: 'Admin'
+    cart: []
   },
   methods: {
     addProductToCart(product) {
@@ -31,13 +28,12 @@ export const eventBus = new Vue({
       this.cart = this.cart.slice().filter( i => i.id !== item.id );
       this.$emit('update:cart', this.cart.slice());
     },
-    changePage(page) {
-      this.page = page;
-      this.$emit('update:page', this.page);
-    },
-    addProduct(product) {
-      this.products = [ ...this.products, { ...product, id: this.products.length + 1 + '' }],
-      this.$emit('update:products', this.products);
+    addProduct(product) { 
+      this.$http.post('products.json', product)
+                .then( () => {
+                  this.products = [ ...this.products, { ...product, id: this.products.length + 1 + '' }],
+                  this.$emit('update:products', this.products);
+                }) 
     },
     addProducts(products) {
       this.products = products;
